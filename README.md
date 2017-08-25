@@ -21,5 +21,6 @@ To work with this module you have to:
 
 ## Examples
 ![alt text](https://github.com/RafayelGardishyan/TurtleCityFramework/blob/master/Example2.png)
+![alt text](https://github.com/RafayelGardishyan/TurtleCityFramework/blob/master/Example.gif)
 
 
