@@ -1,6 +1,8 @@
 # TurtleCityFramework
 A framework to draw city attributes with turtle.  
-To work with this module you have to:  
+To work with this module you have to:
+* Download this module to your project dir
+* Import this module
 * Make a scene in the Drawer class.  
 * Call a function from the function list  
 
@@ -10,7 +12,8 @@ To work with this module you have to:
 * .DrawSun(size)
 * .DrawTree(size)
 * .DrawCar(size, color(optional))
-* .Render(SceneName)
+* .DrawClud(size, outerColor(optional), innerColor(optional))
+* .RenderSVG(SceneName)
 * .MoveUp(pixels)
 * .MoveDown(pixels)
 * .MoveRight(pixels)
@@ -22,5 +25,4 @@ To work with this module you have to:
 ## Examples
 ![alt text](https://github.com/RafayelGardishyan/TurtleCityFramework/blob/master/Example2.png)
 ![alt text](https://github.com/RafayelGardishyan/TurtleCityFramework/blob/master/Example.gif)
-
-
+![alt text](https://github.com/RafayelGardishyan/TurtleCityFramework/blob/master/Test.png)
