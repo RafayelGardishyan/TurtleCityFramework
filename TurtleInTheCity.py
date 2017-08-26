@@ -1,6 +1,11 @@
 import turtle
 from time import sleep
-import canvasvg
+try:
+    import canvasvg
+except ImportError:
+    import pip
+    pip.main(['install', 'canvasvg'])
+    import canvasvg
 # from svglib.svglib import svg2rlg
 # from reportlab.graphics import renderPDF, renderPM
 # from os import remove
@@ -14,7 +19,9 @@ class Drawer:
     renderCount = 1
     PrevName = ""
 
+
     def RenderSVG(self, SceneName):
+        self.t.hideturtle()
         if self.PrevName == SceneName:
             nameSav = SceneName + str(self.renderCount) + ".svg"
             ts = self.t.getscreen().getcanvas()
@@ -28,7 +35,7 @@ class Drawer:
             canvasvg.saveall(nameSav, ts)
             self.renderCount += 1
             self.PrevName = SceneName
-
+        self.t.showturtle()
     # def RenderPNG(self, SceneName):
     #     if self.PrevName == SceneName:
     #         nameSav = SceneName + str(self.renderCount) + ".svg"
@@ -422,6 +429,6 @@ class Drawer:
 if __name__ == '__main__':
     Scene = Drawer()
     Scene.SetSpeed(0)
-    Scene.DrawCloud(180)
-    Scene.RenderSVG('Test')
+    Scene.DrawCloud(25)
+    Scene.RenderSVG('CloudMovement')
     input()
