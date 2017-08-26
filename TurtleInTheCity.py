@@ -1,6 +1,10 @@
 import turtle
 from time import sleep
 import canvasvg
+# from svglib.svglib import svg2rlg
+# from reportlab.graphics import renderPDF, renderPM
+# from os import remove
+
 
 
 class Drawer:
@@ -10,12 +14,13 @@ class Drawer:
     renderCount = 1
     PrevName = ""
 
-    def Render(self, SceneName):
+    def RenderSVG(self, SceneName):
         if self.PrevName == SceneName:
             nameSav = SceneName + str(self.renderCount) + ".svg"
             ts = self.t.getscreen().getcanvas()
             canvasvg.saveall(nameSav, ts)
             self.renderCount += 1
+            self.PrevName = SceneName
         else:
             self.renderCount = 1
             nameSav = SceneName + str(self.renderCount) + ".svg"
@@ -24,6 +29,26 @@ class Drawer:
             self.renderCount += 1
             self.PrevName = SceneName
 
+    # def RenderPNG(self, SceneName):
+    #     if self.PrevName == SceneName:
+    #         nameSav = SceneName + str(self.renderCount) + ".svg"
+    #         ts = self.t.getscreen().getcanvas()
+    #         canvasvg.saveall(nameSav, ts)
+    #         drawing = svg2rlg(nameSav)
+    #         renderPM.drawToFile(drawing, SceneName + ".png")
+    #         remove(nameSav)
+    #         self.renderCount += 1
+    #         self.PrevName = SceneName
+    #     else:
+    #         self.renderCount = 1
+    #         nameSav = SceneName + str(self.renderCount) + ".svg"
+    #         ts = self.t.getscreen().getcanvas()
+    #         canvasvg.saveall(nameSav, ts)
+    #         drawing = svg2rlg(nameSav)
+    #         renderPM.drawToFile(drawing, SceneName + ".png")
+    #         remove(nameSav)
+    #         self.renderCount += 1
+    #         self.PrevName = SceneName
 
     def Delay(self, seconds):
         sleep(seconds)
@@ -225,6 +250,10 @@ class Drawer:
             self.t.forward(size)
             self.t.left(170)
         self.t.end_fill()
+        self.t.penup()
+        self.t.setheading(-90)
+        self.t.forward(size/2)
+        self.t.pendown()
 
     def tree(self, branchLen, t):
         if branchLen > 3:
@@ -358,8 +387,41 @@ class Drawer:
         else:
             print("Enter a correct value for size")
 
+    def DrawCloud(self, size, outerColor='blue', innerColor='lightblue'):
+        self.t.pencolor(outerColor)
+        self.t.fillcolor(innerColor)
+        r = size / 2
+        pi = 3.14
+        result = (r * pi * 2) / 4
+        self.t.begin_fill()
+        self.t.setheading(180)
+        for i in range(180):
+            self.t.forward(result/180/2)
+            self.t.right(1)
+
+        self.t.setheading(90)
+
+        for i in range(180):
+            self.t.forward(result/180/2)
+            self.t.right(1)
+
+        self.t.setheading(0)
+
+        for i in range(180):
+            self.t.forward(result/180/2)
+            self.t.right(1)
+
+        self.t.setheading(180)
+        self.t.forward(size/4)
+        self.t.penup()
+        self.t.end_fill()
+        self.t.forward(size/8)
+        self.t.pendown()
+
 
 if __name__ == '__main__':
     Scene = Drawer()
     Scene.SetSpeed(0)
+    Scene.DrawCloud(180)
+    Scene.RenderSVG('Test')
     input()
