@@ -19,6 +19,50 @@ class Drawer:
     renderCount = 1
     PrevName = ""
 
+    def DrawLine(self, distance):
+        self.t.forward(distance)
+
+    def TurnLeft(self, degrees):
+        self.t.left(degrees)
+
+    def TurnRight(self, degrees):
+        self.t.right(degrees)
+
+    def StopDrawing(self):
+        self.t.penup()
+
+    def StartDrawing(self):
+        self.t.pendown()
+
+    def PenColor(self, color):
+        self.t.pencolor(color)
+
+    def FillColor(self, color):
+        self.t.fillcolor(color)
+
+    def PenSize(self, size):
+        self.t.pensize()
+
+    def DrawCircle(self, size):
+        realsize = size / 360
+        for i in range(360):
+            self.t.forward(realsize)
+            self.t.left(1)
+
+    def ChangeShape(self, shape):
+        self.t.shape(shape)
+
+    def DrawSquare(self, size):
+        for i in range(4):
+            self.t.forward(size)
+            self.t.left(90)
+
+    def DrawRectangle(self, LongSize, ShortSize):
+        for i in range(2):
+            self.t.forward(LongSize)
+            self.t.left(90)
+            self.t.forward(ShortSize)
+            self.t.left(90)
 
     def RenderSVG(self, SceneName):
         self.t.hideturtle()
