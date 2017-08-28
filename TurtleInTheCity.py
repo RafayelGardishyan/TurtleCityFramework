@@ -44,7 +44,11 @@ class Drawer:
         self.t.pensize()
 
     def DrawCircle(self, size):
-        realsize = size / 360
+        realsize = size / 90
+        self.t.setheading(0)
+        self.t.penup()
+        self.t.forward(size/2)
+        self.t.pendown()
         for i in range(360):
             self.t.forward(realsize)
             self.t.left(1)
@@ -322,6 +326,7 @@ class Drawer:
         self.tree(size, self.t)
 
     def DrawCar(self, size, color='red'):
+        size /= 100
         if size != 0:
             self.t.setheading(0)
             self.t.fillcolor(color)
