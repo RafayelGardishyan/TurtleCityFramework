@@ -44,7 +44,11 @@ class Drawer:
     def PenSize(self, size):
         self.t.pensize(size)
 
-    def DrawCircle(self, size):
+    def DrawCircle(self, size, color='black', fill=False, fillcolor='black'):
+        self.t.pencolor(color)
+        if fill:
+            self.t.fillcolor(fillcolor)
+            self.t.begin_fill()
         realsize = size / 90
         self.t.setheading(0)
         self.t.penup()
@@ -54,20 +58,37 @@ class Drawer:
             self.t.forward(realsize)
             self.t.left(1)
 
+        if fill:
+            self.t.end_fill()
+
     def ChangeShape(self, shape):
         self.t.shape(shape)
 
-    def DrawSquare(self, size):
+    def DrawSquare(self, size, color='black', fill=False, fillcolor='black'):
+        self.t.pencolor(color)
+        if fill:
+            self.t.fillcolor(fillcolor)
+            self.t.begin_fill()
         for i in range(4):
             self.t.forward(size)
             self.t.left(90)
 
-    def DrawRectangle(self, LongSize, ShortSize):
+        if fill:
+            self.t.end_fill()
+
+    def DrawRectangle(self, LongSize, ShortSize, color='black', fill=False, fillcolor='black'):
+        self.t.pencolor(color)
+        if fill:
+            self.t.fillcolor(fillcolor)
+            self.t.begin_fill()
         for i in range(2):
             self.t.forward(LongSize)
             self.t.left(90)
             self.t.forward(ShortSize)
             self.t.left(90)
+
+        if fill:
+            self.t.end_fill()
 
     def RenderSVG(self, SceneName):
         self.t.hideturtle()
@@ -147,11 +168,11 @@ class Drawer:
         self.t.pendown()
         self.t.setheading(0)
 
-    def DrawRoofedHouse(self, size):
+    def DrawRoofedHouse(self, size, color='peru', windowcolor='red'):
         Sub = size / 5
         self.t.setheading(0)
         self.t.pencolor('black')
-        self.t.fillcolor('peru')
+        self.t.fillcolor(color)
         self.t.begin_fill()
         for i in range(4):
             self.t.forward(size)
@@ -162,8 +183,8 @@ class Drawer:
         self.t.left(90)
         self.t.forward(size)
         self.t.pendown()
-        self.t.pencolor('red')
-        self.t.fillcolor('red')
+        self.t.pencolor(windowcolor)
+        self.t.fillcolor(windowcolor)
         self.t.begin_fill()
         self.t.right(45)
         self.t.forward(self.GetRoofLength(size/2))
@@ -229,12 +250,11 @@ class Drawer:
         self.t.setheading(180)
         self.t.forward(Sub * 4)
 
-
-    def DrawFlat(self, size):
+    def DrawFlat(self, size, color='gainsboro', windowcolor='lightcyan'):
         Sub = size/5
         self.t.setheading(0)
         self.t.pencolor('black')
-        self.t.fillcolor('gainsboro')
+        self.t.fillcolor(color)
         self.t.begin_fill()
         for i in range(2):
             self.t.forward(size)
@@ -270,7 +290,7 @@ class Drawer:
             self.t.pendown()
 
         def DrawWindow():
-            self.t.fillcolor('lightcyan')
+            self.t.fillcolor(windowcolor)
             self.t.begin_fill()
             for i in range(5):
                 self.t.forward(Sub)
@@ -299,8 +319,8 @@ class Drawer:
         self.t.end_fill()
         self.t.forward(Sub*3)
 
-    def DrawSun(self, size):
-        self.t.color('red', 'yellow')
+    def DrawSun(self, size, outercolor='red', innercolor='yellow'):
+        self.t.color(outercolor, innercolor)
         self.t.begin_fill()
         for i in range(36):
             self.t.forward(size)
@@ -321,7 +341,8 @@ class Drawer:
             self.t.right(15)
             self.t.backward(branchLen)
 
-    def DrawTree(self, size):
+    def DrawTree(self, size, color):
+        self.t.pencolor(color)
         self.t.setheading(90)
         self.t.color('green')
         self.tree(size, self.t)
@@ -482,7 +503,9 @@ class Drawer:
 
         for i in range(length):
             letter = lower[i]
-            if letter == 'a':
+            if letter == ' ':
+                self.MoveRight(size)
+            elif letter == 'a':
                 self.DrawLetterA(size, color)
             elif letter == 'b':
                 self.DrawLetterB(size, color)
