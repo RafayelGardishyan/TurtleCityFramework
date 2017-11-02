@@ -6,6 +6,17 @@ To work with this module you have to:
 3. Make a scene in the Drawer class.
 4. Call a function from the function list
 
+### Example Code:
+```python
+import TurtleInTheCity
+
+Scene = TurtleInTheCity.Drawer()
+
+Scene.DrawRoofedHouse(50)
+Scene.RenderSVG('test')
+```
+
+
 ### Function List:
 * .DrawRoofedHouse(size)
 * .DrawFlat(size)
