@@ -1,5 +1,6 @@
 import turtle
 from time import sleep
+import math
 try:
     import canvasvg
 except ImportError:
@@ -41,7 +42,7 @@ class Drawer:
         self.t.fillcolor(color)
 
     def PenSize(self, size):
-        self.t.pensize()
+        self.t.pensize(size)
 
     def DrawCircle(self, size):
         realsize = size / 90
@@ -474,10 +475,86 @@ class Drawer:
         self.t.forward(size/8)
         self.t.pendown()
 
+    def Write(self, text, size, color='black'):
+        c = 0
+        length = len(text)
+        lower = text.lower()
+
+        for i in range(length):
+            letter = lower[i]
+            if letter == 'a':
+                self.DrawLetterA(size, color)
+            elif letter == 'b':
+                self.DrawLetterB(size, color)
+
+            self.MoveRight(size)
+            c += 1
+
+        for i in range(c):
+            self.MoveLeft(size)
+
+        self.t.setheading(0)
+
+    def DrawLetterA(self, size, color='black'):
+        side = size + (size / 20)
+        angle = 45
+        halfside = side/2
+        cos = math.cos(angle)
+        # middle = math.sqrt((math.pow(back, back) + math.pow(back, back)) - ((2 * back * back) * cos))
+        # print(middle)
+        # middle = 19.134
+        middle = halfside * math.sqrt(2 - math.sqrt(2))
+        start = side * math.sqrt(2 - math.sqrt(2))
+
+        self.t.pencolor(color)
+        self.t.pendown()
+        self.t.setheading(67.5)
+        self.t.forward(side)
+        self.t.right(180-angle)
+        self.t.forward(side)
+        self.t.right(180)
+        self.t.forward(halfside)
+        self.t.setheading(180)
+        self.t.forward(middle)
+        self.t.backward(middle)
+        self.t.setheading(-67.5)
+        self.t.forward(halfside)
+        self.t.setheading(0)
+        self.t.penup()
+        self.t.backward(start)
+        self.t.pendown()
+
+    def DrawLetterB(self, size, color='black'):
+        side = size
+        side3 = side/3
+        side32 = (side/3)*2
+        angles = 180
+        halfcircle1 = ((math.pi * side3) / 2) / 180
+        halfcircle2 = ((math.pi * side32) / 2) / 180
+
+        self.t.pencolor(color)
+        self.t.pendown()
+        self.t.setheading(90)
+        self.t.forward(side)
+        self.t.setheading(0)
+        self.t.forward(side/5)
+        for i in range(angles):
+            self.t.forward(halfcircle1)
+            self.t.right(1)
+        self.t.forward(side/5)
+        self.t.setheading(0)
+        self.t.forward(side / 5)
+        for i in range(angles):
+            self.t.forward(halfcircle2)
+            self.t.right(1)
+        self.t.forward(side / 5)
+        self.t.setheading(0)
+
 
 if __name__ == '__main__':
     Scene = Drawer()
     Scene.SetSpeed(0)
-    Scene.DrawCloud(25)
-    Scene.RenderSVG('CloudMovement')
+    # Scene.Write("rafayel", 15)
+    Scene.DrawCar(50)
+    Scene.Write('AB', 100, 'red')
     input()
