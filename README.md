@@ -12,13 +12,13 @@ import TurtleInTheCity
 
 Scene = TurtleInTheCity.Drawer()
 
-Scene.DrawRoofedHouse(50)
+Scene.DrawRoofedHouse(50, 'peru', 'red')
 Scene.RenderSVG('test')
 ```
 
 
 ### Functions List:
-* DrawRoofedHouse(size, color(optional), windowcolor(optional))
+* DrawRoofedHouse(size, color(optional), roofcolor(optional))
 * DrawFlat(size, color(optional), windowcolor(optional))
 * DrawSun(size, innercolor(optional), outercolor(optional))
 * DrawTree(size, color(optional))
