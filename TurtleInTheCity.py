@@ -22,6 +22,7 @@ class Drawer:
     letter_angle = 63
 
     def DrawLine(self, distance):
+        self.t.pendown()
         self.t.forward(distance)
 
     def TurnLeft(self, degrees):
@@ -29,6 +30,10 @@ class Drawer:
 
     def TurnRight(self, degrees):
         self.t.right(degrees)
+
+    def DrawLineBackward(self, pixels):
+        self.t.pendown()
+        self.t.backward(pixels)
 
     def StopDrawing(self):
         self.t.penup()
@@ -502,6 +507,8 @@ class Drawer:
         length = len(text)
         lower = text.lower()
         spaces = 0
+        ws = 0
+        w = False
 
         for i in range(length):
             letter = lower[i]
@@ -516,14 +523,24 @@ class Drawer:
                 self.DrawLetterY(size, color)
             elif letter == 'z':
                 self.DrawLetterZ(size, color)
+            elif letter == 'w':
+                self.DrawLetterW(size, color)
+                ws += 1
+                w = True
 
             if spaces == 0:
                 self.MoveRight(size)
             else:
                 spaces = 0
+            # if w:
+            #     self.MoveRight(size/5)
+            #     w = False
             c += 1
 
         for i in range(c):
+            if ws != 0:
+                self.MoveRight(size/2)
+                ws -= 1
             self.MoveLeft(size)
 
         self.t.setheading(0)
@@ -650,12 +667,38 @@ class Drawer:
         self.t.backward(width)
         self.t.pendown()
 
+    def DrawLetterW(self, size, color='black'):
+        height = size
+        width = height/2
+        quarterwidth = width/4
+        diagonal = math.sqrt((height**2)+(quarterwidth**2))
+
+        self.t.pencolor(color)
+        self.t.penup()
+        self.t.setheading(90)
+        self.t.forward(height)
+        self.t.pendown()
+        self.t.right(172.97)
+        self.t.forward(diagonal)
+        self.t.left(165.97)
+        self.t.forward(diagonal)
+        self.t.right(165.97)
+        self.t.forward(diagonal)
+        self.t.left(165.97)
+        self.t.forward(diagonal)
+        self.t.penup()
+        self.t.setheading(-90)
+        self.t.forward(height)
+        self.t.setheading(0)
+        self.t.backward(width*2)
+
+
 
 if __name__ == '__main__':
     Scene = Drawer()
     Scene.SetSpeed(0)
     Scene.MoveLeft(300)
     # Scene.Write("rafayel", 15)
-    Scene.PenSize(15)
-    Scene.DrawLetterX(100)
+    Scene.PenSize(5)
+    Scene.Write("AWAtar", 300)
     input()
