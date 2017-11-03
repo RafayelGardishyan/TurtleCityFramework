@@ -1,4 +1,10 @@
 # TurtleCityFramework
+
+Docs for a specific version of this framework can be found in the wiki tab of this repository
+
+Quick Link: [Wiki](https://github.com/RafayelGardishyan/TurtleCityFramework/wiki)
+
+## Docs Latest Version
 A framework to draw city attributes with turtle.
 To work with this module you have to:
 1. Download this module to your project dir
