@@ -169,7 +169,7 @@ class Drawer:
         self.t.pendown()
         self.t.setheading(0)
 
-    def DrawRoofedHouse(self, size, color='peru', roofcolor='red'):
+    def DrawRoofedHouse(self, size, color='peru', roofcolor='red', windowcolor='lightcyan', doorcolor='saddlebrown'):
         Sub = size / 5
         self.t.setheading(0)
         self.t.pencolor('black')
@@ -184,8 +184,8 @@ class Drawer:
         self.t.left(90)
         self.t.forward(size)
         self.t.pendown()
-        self.t.pencolor(windowcolor)
-        self.t.fillcolor(windowcolor)
+        self.t.pencolor(roofcolor)
+        self.t.fillcolor(roofcolor)
         self.t.begin_fill()
         self.t.right(45)
         self.t.forward(self.GetRoofLength(size/2))
@@ -209,7 +209,7 @@ class Drawer:
             self.t.pendown()
 
         def DrawWindow():
-            self.t.fillcolor('lightcyan')
+            self.t.fillcolor(windowcolor)
             self.t.begin_fill()
             for i in range(5):
                 self.t.forward(Sub)
@@ -240,7 +240,7 @@ class Drawer:
         MoveWindowDown()
 
         self.t.setheading(90)
-        self.t.fillcolor('saddlebrown')
+        self.t.fillcolor(doorcolor)
         self.t.begin_fill()
         self.t.forward(Sub * 2)
         self.t.right(90)

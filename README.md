@@ -24,7 +24,7 @@ Scene.RenderSVG('test')
 
 
 ### Functions List:
-* DrawRoofedHouse(size, color(optional), roofcolor(optional))
+* DrawRoofedHouse(size, color(optional), roofcolor(optional), windowcolor(optional), doorcolor(optional))
 * DrawFlat(size, color(optional), windowcolor(optional))
 * DrawSun(size, innercolor(optional), outercolor(optional))
 * DrawTree(size, color(optional))
