@@ -168,7 +168,7 @@ class Drawer:
         self.t.pendown()
         self.t.setheading(0)
 
-    def DrawRoofedHouse(self, size, color='peru', windowcolor='red'):
+    def DrawRoofedHouse(self, size, color='peru', roofcolor='red'):
         Sub = size / 5
         self.t.setheading(0)
         self.t.pencolor('black')
