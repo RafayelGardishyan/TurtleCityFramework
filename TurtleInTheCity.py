@@ -19,6 +19,7 @@ class Drawer:
 
     renderCount = 1
     PrevName = ""
+    letter_angle = 63
 
     def DrawLine(self, distance):
         self.t.forward(distance)
@@ -594,7 +595,7 @@ class Drawer:
         self.t.setheading(0)
         self.t.forward(width)
         self.t.backward(width)
-        self.t.setheading(63)
+        self.t.setheading(self.letter_angle)
         self.t.forward(diagonal)
         self.t.setheading(0)
         self.t.backward(width)
@@ -629,11 +630,32 @@ class Drawer:
         self.t.backward(halfwidth)
         self.t.pendown()
 
+    def DrawLetterX(self, size, color='black'):
+        width = size / 2
+        height = size
+        diagonal = math.sqrt((height**2)+(width**2))
+
+        self.t.pencolor(color)
+        self.t.pendown()
+        self.t.setheading(self.letter_angle)
+        self.t.forward(diagonal)
+        self.t.setheading(180)
+        self.t.penup()
+        self.t.forward(width)
+        self.t.pendown()
+        self.t.setheading(-self.letter_angle)
+        self.t.forward(diagonal)
+        self.t.setheading(0)
+        self.t.penup()
+        self.t.backward(width)
+        self.t.pendown()
+
+
 if __name__ == '__main__':
     Scene = Drawer()
     Scene.SetSpeed(0)
     Scene.MoveLeft(300)
     # Scene.Write("rafayel", 15)
     Scene.PenSize(15)
-    Scene.Write('ABYZ', 100, 'blue')
+    Scene.DrawLetterX(100)
     input()
