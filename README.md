@@ -4,16 +4,25 @@ Docs for a specific version of this framework can be found in the wiki tab of th
 
 Quick Link: [Wiki](https://github.com/RafayelGardishyan/TurtleCityFramework/wiki)
 
-## Docs Latest Version
-A framework to draw city attributes with turtle.
+## Docs Latest Version (v1.3.2.4)
+A framework to draw easier with turtle.
 To work with this module you have to:
-1. Download this module to your project dir
-2. Import this module
-3. Make a scene in the Drawer class.
-4. Call a function from the function list
+1. Download source or release archive(then unzip)
+2. Make a new file in the same dir
+3. Import this module in the file
+4. Make a scene in the Drawer class.
+5. Call a function from the function list
 
 ### Example Code:
+```
+File Tree:
+dir/
+   /TurtleInTheCity.py
+   /MyFile.py
+```
 ```python
+# MyFile.py
+
 import TurtleInTheCity
 
 Scene = TurtleInTheCity.Drawer()

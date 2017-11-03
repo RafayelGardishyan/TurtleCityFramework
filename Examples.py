@@ -20,6 +20,6 @@ if __name__ == '__main__':
     Scene.MoveLeft(125)
     Scene.DrawCloud(75)
     Scene.MoveDown(75)
-    Scene.Write('ABXY Z', 50, 'green')
+    Scene.Write('ABXY WZ', 50, 'green')
     Scene.RenderSVG('Example')
     input()
