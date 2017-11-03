@@ -347,7 +347,7 @@ class Drawer:
             self.t.right(15)
             self.t.backward(branchLen)
 
-    def DrawTree(self, size, color):
+    def DrawTree(self, size, color='green'):
         self.t.pencolor(color)
         self.t.setheading(90)
         self.t.color('green')
