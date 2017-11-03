@@ -500,17 +500,26 @@ class Drawer:
         c = 0
         length = len(text)
         lower = text.lower()
+        spaces = 0
 
         for i in range(length):
             letter = lower[i]
             if letter == ' ':
                 self.MoveRight(size)
+                spaces += 1
             elif letter == 'a':
                 self.DrawLetterA(size, color)
             elif letter == 'b':
                 self.DrawLetterB(size, color)
+            elif letter == 'y':
+                self.DrawLetterY(size, color)
+            elif letter == 'z':
+                self.DrawLetterZ(size, color)
 
-            self.MoveRight(size)
+            if spaces == 0:
+                self.MoveRight(size)
+            else:
+                spaces = 0
             c += 1
 
         for i in range(c):
@@ -573,11 +582,58 @@ class Drawer:
         self.t.forward(side / 5)
         self.t.setheading(0)
 
+    def DrawLetterZ(self, size, color='black'):
+        height = size
+        width = size/2
+        # print((height**height)+(width**width))
+        # diagonal = math.sqrt((height**height)+(width**width))
+        diagonal = math.sqrt(((height**2) + (width**2)))
+
+        self.t.pencolor(color)
+        self.t.pendown()
+        self.t.setheading(0)
+        self.t.forward(width)
+        self.t.backward(width)
+        self.t.setheading(63)
+        self.t.forward(diagonal)
+        self.t.setheading(0)
+        self.t.backward(width)
+        self.t.penup()
+        self.MoveDown(height)
+        self.t.pendown()
+
+    def DrawLetterY(self, size, color='black'):
+        height = size
+        width = size/2
+        halfwidth = width/2
+        halfheight = height/2
+        triangleside = math.sqrt((halfheight**2)+((width/2)**2))
+
+        self.t.pencolor(color)
+        self.t.penup()
+        self.t.setheading(0)
+        self.t.forward(halfwidth)
+        self.t.pendown()
+        self.t.setheading(90)
+        self.t.forward(halfheight)
+        self.t.right(30)
+        self.t.forward(triangleside)
+        self.t.backward(triangleside)
+        self.t.left(60)
+        self.t.forward(triangleside)
+        self.t.backward(triangleside)
+        self.t.setheading(90)
+        self.t.backward(halfheight)
+        self.t.setheading(0)
+        self.t.penup()
+        self.t.backward(halfwidth)
+        self.t.pendown()
 
 if __name__ == '__main__':
     Scene = Drawer()
     Scene.SetSpeed(0)
+    Scene.MoveLeft(300)
     # Scene.Write("rafayel", 15)
-    Scene.DrawCar(50)
-    Scene.Write('AB', 100, 'red')
+    Scene.PenSize(15)
+    Scene.Write('ABYZ', 100, 'blue')
     input()
